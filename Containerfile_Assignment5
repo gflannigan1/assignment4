@@ -1,0 +1,14 @@
+
+FROM fedora:latest
+
+RUN dnf -y upgrade && \
+    dnf -y install httpd && \
+    dnf clean all
+
+COPY data /var/www/html/data
+
+RUN systemctl enable httpd
+
+EXPOSE 80
+
+CMD ["httpd", "-D", "FOREGROUND"]
